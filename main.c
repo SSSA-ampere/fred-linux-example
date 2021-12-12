@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "fred_support/fred_lib.h"
+#include "fred_lib.h"
 #include "periodic_task.h"
 #include "demo_hw_task.h"
 

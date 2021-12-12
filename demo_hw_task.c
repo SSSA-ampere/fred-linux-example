@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "fred_support/fred_lib.h"
+#include "fred_lib.h"
 #include "demo_hw_task.h"
 
 #define ARRAY_SIZE	1024
