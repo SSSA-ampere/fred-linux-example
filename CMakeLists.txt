@@ -1,9 +1,19 @@
 cmake_minimum_required(VERSION 3.0)
 project(fred-test-cli LANGUAGES C)
 
-set(FRED_PATH "/opt/fredsys")
+IF(DEFINED $ENV{FRED_PATH})
+    # if the environment variable is defined, use it
+    set (FRED_PATH $ENV{FRED_PATH})
+else()
+    # default installation path
+    if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+        set (CMAKE_INSTALL_PREFIX "/opt/fredsys/"
+            CACHE PATH "default install path" FORCE)
+    endif()
+    set (FRED_PATH ${CMAKE_INSTALL_PREFIX})
+endif()
 
-set(CMAKE_C_FLAGS "-std=gnu99 -O2 -Wall -Werror -fpic -DFRED_PATH=${FRED_PATH}")
+set(CMAKE_C_FLAGS "-std=gnu99 -O2 -Wall -Werror -fpic")
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/
