@@ -13,6 +13,17 @@ else()
     set (FRED_PATH ${CMAKE_INSTALL_PREFIX})
 endif()
 
+# enforce the depedency to libfred. It must be installed before compiling an application
+find_library(LIBFRED
+    NAMES fred libfred fred-lib fredlib
+    HINTS 
+        ${FRED_PATH}/lib
+)
+
+if(NOT LIBFRED)
+  message(FATAL_ERROR "You have to compile and install fred_lib before compiling the test applications")
+endif()
+
 set(CMAKE_C_FLAGS "-std=gnu99 -O2 -Wall -Werror -fpic")
 
 include_directories(
@@ -24,22 +35,16 @@ link_directories(
     ${FRED_PATH}/lib/
 )
 
-# check the depedency to libfred
-find_library(LIBFRED REQUIRED
-    NAMES fred libfred fred-lib fredlib
-    HINTS ${FRED_PATH}/lib)
-#include_directories(${LIBFRED_INCLUDE_DIR})
-
-add_executable(${CMAKE_PROJECT_NAME} 
+add_executable(${PROJECT_NAME} 
     demo_hw_task.c
     periodic_task.c
     main.c
 )
 
 # libraries to be linked
-target_link_libraries(${CMAKE_PROJECT_NAME} m pthread fred)
+target_link_libraries(${PROJECT_NAME} m pthread fred)
 
-INSTALL(TARGETS ${CMAKE_PROJECT_NAME}
+INSTALL(TARGETS ${PROJECT_NAME}
         DESTINATION ${FRED_PATH}
         RUNTIME DESTINATION ${FRED_PATH}/examples
 )
