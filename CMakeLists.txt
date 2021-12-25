@@ -24,7 +24,7 @@ if(NOT LIBFRED)
   message(FATAL_ERROR "You have to compile and install fred_lib before compiling the test applications")
 endif()
 
-set(CMAKE_C_FLAGS "-std=gnu99 -O2 -Wall -Werror -fpic")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -O2 -Wall -Werror -fpic")
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/
