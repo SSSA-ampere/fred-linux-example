@@ -45,6 +45,6 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} m pthread fred)
 
 INSTALL(TARGETS ${PROJECT_NAME}
-        DESTINATION ${FRED_PATH}
-        RUNTIME DESTINATION ${FRED_PATH}/examples
+        #DESTINATION ${FRED_PATH}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
 )
